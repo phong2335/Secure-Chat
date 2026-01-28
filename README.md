@@ -76,6 +76,7 @@ python client.py
 
 - Giao diện khi chạy server và lắng nghe các client kết nối đến
   ![image.png](images/image1.png)
+  
 - Giao diện menu lựa chọn từ client
   ![image.png](images/image2.png)
 - Đăng ký thành công và gửi QR để thiết lập xác thực 2 lớp, dùng ứng dụng xác thực Authenticator
