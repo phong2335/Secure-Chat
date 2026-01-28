@@ -52,7 +52,8 @@ def handle_client(client_sock, addr):
                         otp_in = client_sock.recv(1024).decode().strip()
                         if pyotp.TOTP(otp_sec).verify(otp_in):
                             client_sock.sendall("Login success\n".encode())
-                            client_sock.sendall("Hãy gửi tin nhắn theo cách của bạn:\n".encode())
+                            client_sock.sendall("""Hãy gửi tin nhắn theo cách của bạn:
+(cú pháp gửi tin nhắn mã hóa: 'ENC: [nội dung tin nhắn]'\n""".encode())
                             username = u
                             clients.append(client_sock)
                             break
