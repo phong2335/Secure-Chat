@@ -48,6 +48,7 @@ python init_database.py
 _Lưu ý: Bạn cần tự tạo chứng chỉ SSL (`server.crt` và `server.key`) bằng OpenSSL và đặt vào thư mục gốc._
 
 - Lệnh tạo chứng chỉ bằng OpenSSL
+
   ```powershell
   openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes
   ```
@@ -74,17 +75,35 @@ python client.py
 
 ## 📸 Demo
 
-- Giao diện khi chạy server và lắng nghe các client kết nối đến
-  ![image.png](images/image1.png)
-  
-- Giao diện menu lựa chọn từ client
-  ![image.png](images/image2.png)
-- Đăng ký thành công và gửi QR để thiết lập xác thực 2 lớp, dùng ứng dụng xác thực Authenticator
-  ![image.png](images/image3.png)
-- Giao diện đăng nhập thành công
-  ![image.png](images/image4.png)
-- Muốn gửi tin nhắn mã hóa thì gửi theo cú pháp
-  ```powershell
-  ENC: 'nội dung tin nhắn'
-  ```
-- Nếu không có ‘ENC:’ thì tin nhắn gửi đi sẽ không được mã hóa bằng Fernet mà chỉ có TLS.
+### 1. Khởi chạy Server
+
+Server khởi động và lắng nghe kết nối an toàn (SSL/TLS) tại địa chỉ `127.0.0.1:8080`.
+![Server Running](images/image1.png)
+
+### 2. Giao diện Client
+
+Menu chính cho phép người dùng lựa chọn Đăng ký hoặc Đăng nhập.
+![Client Menu](images/image2.png)
+
+### 3. Đăng ký & Thiết lập 2FA
+
+Sau khi đăng ký thành công, hệ thống trả về mã QR. Người dùng sử dụng ứng dụng **Google Authenticator** (hoặc Authy) quét mã này để lấy mã OTP 6 số.
+![QR Code Setup](images/image3.png)
+
+### 4. Đăng nhập & Chat
+
+Giao diện sau khi nhập đúng mật khẩu và mã OTP.
+![Chat Interface](images/image4.png)
+
+### 💡 Hướng dẫn gửi tin nhắn
+
+Hệ thống hỗ trợ 2 chế độ gửi tin:
+
+- **Chế độ mặc định (Chỉ TLS):** Gõ tin nhắn bình thường.
+- **Chế độ E2EE (Mã hóa đầu cuối):** Thêm tiền tố `ENC:` trước tin nhắn.
+
+**Ví dụ:**
+
+```powershell
+ENC: Hello world
+```
