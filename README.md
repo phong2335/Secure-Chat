@@ -110,3 +110,26 @@ Hệ thống hỗ trợ 2 chế độ gửi tin:
 ```powershell
 ENC: Hello world
 ```
+
+## 🛡️Kiểm chứng mã hóa bằng WireShark
+
+### 1. Bắt tay TCP (TCP 3-Way Handshake)
+
+    ![image.png](images/image6.png)
+
+### 2. Bắt tay bảo mật (TLS Handshake)
+
+- Ngay sau khi kết nối thông (dòng 4046), Client bắt đầu gửi dữ liệu để thiết lập mã hóa.
+  ![image.png](images/image7.png)
+  ![image.png](images/image8.png)
+- **PSH** là viết tắt của **PUSH**. Đây là một "cờ" (flag) trong giao thức TCP báo hiệu gửi ngay mà không cần chờ đủ số lượng trong buffer.
+- Gói 4047 [PSH, ACK] (Len=517): là gói **Client Hello** của giao thức TLS, gửi kèm danh sách các thuật toán mã hóa mà máy client hỗ trợ.
+- Gói 4048 [ACK]: Server báo "Đã nhận được yêu cầu Client Hello".
+- Gói 4049 [PSH, ACK] (Len=1475): là gói **Server Hello + Certificate**. Server gửi thuật toán mà nó sử dụng và Chứng minh thư (file server.py)
+- Các gói tin tiếp theo (4051 đến 4058) là quá trình hai bên thỏa thuận "chìa khóa bí mật" (Session Key) để mã hóa cuộc hội thoại sau này.
+
+### 3. Nội dung gói tin
+
+- Nhìn vào phần nội dung gói tin dưới dạng ASCII thấy toàn ký tự lạ → đã được mã hóa.
+  ![image.png](images/image9.png)
+  ![image.png](images/image10.png)
