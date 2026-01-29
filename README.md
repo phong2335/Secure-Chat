@@ -98,8 +98,6 @@ Giao diện sau khi nhập đúng mật khẩu và mã OTP.
 Tin nhắn ở phía server có thể nhìn thấy chỉ là tin nhắn mã hóa
 ![image](images/image5.png)
 
-### 💡 Hướng dẫn gửi tin nhắn
-
 ### 💡 Hướng dẫn gửi tin nhắn (nhắn tin qua lại giữa các máy client)
 
 Hệ thống hỗ trợ 2 chế độ gửi tin:
