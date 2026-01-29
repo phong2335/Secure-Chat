@@ -115,7 +115,7 @@ ENC: Hello world
 
 ### 1. Bắt tay TCP (TCP 3-Way Handshake)
 
-    ![image.png](images/image6.png)
+  ![image.png](images/image6.png)
 
 ### 2. Bắt tay bảo mật (TLS Handshake)
 
