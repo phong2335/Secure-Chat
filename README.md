@@ -99,9 +99,8 @@ Tin nhắn ở phía server có thể nhìn thấy chỉ là tin nhắn mã hóa
 ![image](images/image5.png)
 
 ### 💡 Hướng dẫn gửi tin nhắn
-=======
+
 ### 💡 Hướng dẫn gửi tin nhắn (nhắn tin qua lại giữa các máy client)
->>>>>>> dc6deea3ba8e281998cff64e263851f231e2b7d7
 
 Hệ thống hỗ trợ 2 chế độ gửi tin:
 
