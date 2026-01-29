@@ -68,6 +68,7 @@ def handle_client(client_sock, addr):
             msg = client_sock.recv(1024)
             if not msg: 
                 break
+            print(msg)
             for c in clients:
                 if c != client_sock:
                     try: c.sendall(msg)

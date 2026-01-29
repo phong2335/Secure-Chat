@@ -95,6 +95,9 @@ Sau khi đăng ký thành công, hệ thống trả về mã QR. Người dùng 
 Giao diện sau khi nhập đúng mật khẩu và mã OTP.
 ![Chat Interface](images/image4.png)
 
+Tin nhắn ở phía server có thể nhìn thấy chỉ là tin nhắn mã hóa
+![image](images/image5.png)
+
 ### 💡 Hướng dẫn gửi tin nhắn
 
 Hệ thống hỗ trợ 2 chế độ gửi tin:
