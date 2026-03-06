@@ -33,9 +33,9 @@ def handle_client(client_sock, addr):
 
                     uri = pyotp.TOTP(otp_secret).provisioning_uri(name=u, issuer_name="SecureApp")
                     link = f"https://api.qrserver.com/v1/create-qr-code/?data={uri}&size=200x200"
-                    client_sock.sendall(f"Đăng ký thành công\nSecret: {otp_secret}\nLink QR: {link}\n".encode())
+                    client_sock.sendall(f"[✔️] Đăng ký thành công\nSecret: {otp_secret}\nLink QR: {link}\n".encode())
                 except: 
-                    client_sock.sendall("Lỗi: Username đã tồn tại!\n".encode())
+                    client_sock.sendall("[❌] Username đã tồn tại!\n".encode())
             elif choice == '2':
                 client_sock.sendall("Username: ".encode()); u = client_sock.recv(1024).decode().strip()
                 client_sock.sendall("Password: ".encode()); p = client_sock.recv(1024).decode().strip()
@@ -51,21 +51,21 @@ def handle_client(client_sock, addr):
                         client_sock.sendall("Nhập OTP (6 số): ".encode())
                         otp_in = client_sock.recv(1024).decode().strip()
                         if pyotp.TOTP(otp_sec).verify(otp_in):
-                            client_sock.sendall("Login success\n".encode())
+                            client_sock.sendall("[✔️] Login success\n".encode())
                             client_sock.sendall("""Hãy gửi tin nhắn theo cách của bạn:
 (cú pháp gửi tin nhắn mã hóa: 'ENC: [nội dung tin nhắn]'\n""".encode())
                             username = u
                             clients.append(client_sock)
                             break
-                        else: client_sock.sendall("Sai OTP!\n".encode())
-                    else: client_sock.sendall("Sai password!\n".encode())
-                else: client_sock.sendall("user không tồn tại!\n".encode())
+                        else: client_sock.sendall("[❌] Sai OTP!\n".encode())
+                    else: client_sock.sendall("[❌] Sai password!\n".encode())
+                else: client_sock.sendall("[❌] user không tồn tại!\n".encode())
             elif choice == '3':
                 break
 
         #vòng lặp chat
         while True: 
-            msg = client_sock.recv(1024)
+            msg = client_sock.recv(5242880)
             if not msg: 
                 break
             print(msg)

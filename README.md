@@ -1,6 +1,6 @@
 # 🔒 Secure Chat System
 
-Hệ thống chat an toàn được viết bằng **Python**, tích hợp các cơ chế bảo mật tiêu chuẩn để đảm bảo tính Bí mật (Confidentiality), Toàn vẹn (Integrity) và Xác thực (Authentication).
+Hệ thống chat và gửi file an toàn được viết bằng **Python**, tích hợp các cơ chế bảo mật tiêu chuẩn để đảm bảo tính Bí mật (Confidentiality), Toàn vẹn (Integrity) và Xác thực (Authentication).
 
 ## 🚀 Tính năng nổi bật
 
@@ -9,7 +9,7 @@ Dự án tập trung giải quyết các vấn đề bảo mật mạng cơ bả
 - **Mã hóa đường truyền (Transport Security):** Sử dụng **SSL/TLS** (Self-signed certificate) để chống nghe lén (Man-in-the-Middle).
 - **Mã hóa đầu cuối (End-to-End Encryption):** Tin nhắn được mã hóa bằng **Fernet (AES)**, Server chỉ đóng vai trò trung chuyển và không thể đọc nội dung tin nhắn.
 - **Xác thực mạnh (Authentication):**
-  - Password được băm (Hashing) bằng **SHA-256** kết hợp với **Salt** để chống tấn công Rainbow Table.
+  - Password được băm (Hashing) bằng **SHA-256** kết hợp với **Salt**.
   - Tích hợp **2FA (Two-Factor Authentication)** sử dụng TOTP (Google Authenticator).
 - **Cơ sở dữ liệu:** Sử dụng SQLite để quản lý người dùng.
 - **Đa luồng (Multithreading):** Server có thể xử lý nhiều Client cùng lúc.
@@ -25,7 +25,7 @@ Dự án tập trung giải quyết các vấn đề bảo mật mạng cơ bả
   - `pyotp`: Tạo mã OTP và QR Code.
   - `sqlite3`: Lưu trữ dữ liệu.
 
-## ⚙️ Cài đặt & Chạy (Installation)
+## ⚙️ Cài đặt & Chạy
 
 ### 1. Cài đặt thư viện
 
@@ -95,7 +95,7 @@ Sau khi đăng ký thành công, hệ thống trả về mã QR. Người dùng 
 Giao diện sau khi nhập đúng mật khẩu và mã OTP.
 ![Chat Interface](images/image4.png)
 
-Tin nhắn ở phía server có thể nhìn thấy chỉ là tin nhắn mã hóa
+Tin nhắn ở phía server có thể nhìn thấy chỉ là tin nhắn mã hóa (đối với tin nhắn E2EE)
 ![image](images/image5.png)
 
 ### 💡 Hướng dẫn gửi tin nhắn (nhắn tin qua lại giữa các máy client)
@@ -109,6 +109,14 @@ Hệ thống hỗ trợ 2 chế độ gửi tin:
 
 ```powershell
 ENC: Hello world
+```
+### 💡 Hướng dẫn gửi file
+
+Gửi file theo cú pháp: File: <đường dẫn file>
+
+**Ví dụ:**
+```powershell
+File: D:\Download\file.txt
 ```
 
 ## 🛡️Kiểm chứng mã hóa bằng WireShark
