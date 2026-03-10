@@ -6,7 +6,7 @@ Hệ thống chat và gửi file an toàn được viết bằng **Python**, tí
 
 Dự án tập trung giải quyết các vấn đề bảo mật mạng cơ bản:
 
-- **Mã hóa đường truyền:** Sử dụng **SSL/TLS** (Self-signed certificate) để chống nghe lén (Man-in-the-Middle).
+- **Mã hóa đường truyền:** Sử dụng **SSL/TLS** (Self-signed certificate) để chống nghe lén Man-in-the-Middle.
 - **Mã hóa đầu cuối:** Tin nhắn được mã hóa bằng **Fernet**, Server chỉ đóng vai trò trung chuyển và không thể đọc nội dung tin nhắn.
 - **Xác thực mạnh:**
   - Password được băm bằng **SHA-256** kết hợp với **Salt**.
@@ -38,12 +38,11 @@ pip install -r requirements.txt
 Bạn cần chạy các script sau để sinh ra khóa bí mật và database
 
 ```bash
-# Sinh khóa mã hóa tin nhắn (secret.key)
 python GenFernet.py
 
-# Khởi tạo database người dùng (users.db)
 python init_database.py
 ```
+
 ### 3. Tạo chứng chỉ SSL
 
 #### Cách 1: Chạy script tự sinh chứng chỉ
@@ -117,11 +116,13 @@ Hệ thống hỗ trợ 2 chế độ gửi tin:
 ```powershell
 ENC: Hello world
 ```
+
 ### 💡 Hướng dẫn gửi file
 
 Gửi file theo cú pháp: File: <đường dẫn file>
 
 **Ví dụ:**
+
 ```powershell
 File: D:\Download\file.txt
 ```
@@ -130,21 +131,19 @@ File: D:\Download\file.txt
 
 ### 1. Bắt tay TCP (TCP 3-Way Handshake)
 
-  ![image.png](images/image6.png)
+![image.png](images/image6.png)
 
 ### 2. Bắt tay bảo mật (TLS Handshake)
 
 - Ngay sau khi kết nối thông (dòng 4046), Client bắt đầu gửi dữ liệu để thiết lập mã hóa.
-  ![image.png](images/image7.png)
   ![image.png](images/image8.png)
-- **PSH** là viết tắt của **PUSH**. Đây là một "cờ" (flag) trong giao thức TCP báo hiệu gửi ngay mà không cần chờ đủ số lượng trong buffer.
 - Gói 4047 [PSH, ACK] (Len=517): là gói **Client Hello** của giao thức TLS, gửi kèm danh sách các thuật toán mã hóa mà máy client hỗ trợ.
 - Gói 4048 [ACK]: Server báo "Đã nhận được yêu cầu Client Hello".
 - Gói 4049 [PSH, ACK] (Len=1475): là gói **Server Hello + Certificate**. Server gửi thuật toán mà nó sử dụng và Chứng minh thư (file server.py)
-- Các gói tin tiếp theo (4051 đến 4058) là quá trình hai bên thỏa thuận "chìa khóa bí mật" (Session Key) để mã hóa cuộc hội thoại sau này.
+- Các gói tin tiếp theo (4051 đến 4058) là quá trình hai bên thỏa thuận (Session Key) để mã hóa cuộc hội thoại sau này.
+- Các gói tin TLSv1.3 là các gói được mã hóa TLS, còn các gói TCP đan xen vào chỉ là các gói để xác nhận đã nhận được.
 
 ### 3. Nội dung gói tin
 
-- Nhìn vào phần nội dung gói tin dưới dạng ASCII thấy toàn ký tự lạ → đã được mã hóa.
-  ![image.png](images/image9.png)
+- Phần nội dung gói tin đã bị mã hóa nằm ở trường Encrypted Application Data
   ![image.png](images/image10.png)
