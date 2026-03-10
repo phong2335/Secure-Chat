@@ -1,27 +1,27 @@
 # 🔒 Secure Chat System
 
-Hệ thống chat và gửi file an toàn được viết bằng **Python**, tích hợp các cơ chế bảo mật tiêu chuẩn để đảm bảo tính Bí mật (Confidentiality), Toàn vẹn (Integrity) và Xác thực (Authentication).
+Hệ thống chat và gửi file an toàn được viết bằng **Python**, tích hợp các cơ chế bảo mật để đảm bảo tiêu chuẩn CIA.
 
 ## 🚀 Tính năng nổi bật
 
 Dự án tập trung giải quyết các vấn đề bảo mật mạng cơ bản:
 
-- **Mã hóa đường truyền (Transport Security):** Sử dụng **SSL/TLS** (Self-signed certificate) để chống nghe lén (Man-in-the-Middle).
-- **Mã hóa đầu cuối (End-to-End Encryption):** Tin nhắn được mã hóa bằng **Fernet (AES)**, Server chỉ đóng vai trò trung chuyển và không thể đọc nội dung tin nhắn.
-- **Xác thực mạnh (Authentication):**
-  - Password được băm (Hashing) bằng **SHA-256** kết hợp với **Salt**.
-  - Tích hợp **2FA (Two-Factor Authentication)** sử dụng TOTP (Google Authenticator).
+- **Mã hóa đường truyền:** Sử dụng **SSL/TLS** (Self-signed certificate) để chống nghe lén (Man-in-the-Middle).
+- **Mã hóa đầu cuối:** Tin nhắn được mã hóa bằng **Fernet**, Server chỉ đóng vai trò trung chuyển và không thể đọc nội dung tin nhắn.
+- **Xác thực mạnh:**
+  - Password được băm bằng **SHA-256** kết hợp với **Salt**.
+  - Tích hợp **2FA** sử dụng TOTP.
 - **Cơ sở dữ liệu:** Sử dụng SQLite để quản lý người dùng.
-- **Đa luồng (Multithreading):** Server có thể xử lý nhiều Client cùng lúc.
+- **Đa luồng:** Server có thể xử lý nhiều Client cùng lúc.
 
 ## 🛠️ Công nghệ sử dụng
 
 - **Language:** Python 3
-- **Network:** Python Socket (TCP/IP)
+- **Network:** Python Socket
 - **Security Libraries:**
   - `ssl`: Tạo kết nối an toàn TLS.
   - `cryptography`: Tạo khóa và mã hóa Fernet.
-  - `hashlib`: Băm mật khẩu (SHA-256).
+  - `hashlib`: Băm mật khẩu.
   - `pyotp`: Tạo mã OTP và QR Code.
   - `sqlite3`: Lưu trữ dữ liệu.
 
@@ -44,8 +44,15 @@ python GenFernet.py
 # Khởi tạo database người dùng (users.db)
 python init_database.py
 ```
+### 3. Tạo chứng chỉ SSL
 
-_Lưu ý: Bạn cần tự tạo chứng chỉ SSL (`server.crt` và `server.key`) bằng OpenSSL và đặt vào thư mục gốc._
+#### Cách 1: Chạy script tự sinh chứng chỉ
+
+```bash
+python gen_ssl_cert.py
+```
+
+#### Cách 2: Tự tạo chứng chỉ bằng OpenSSL và đặt vào thư mục gốc
 
 - Lệnh tạo chứng chỉ bằng OpenSSL
 

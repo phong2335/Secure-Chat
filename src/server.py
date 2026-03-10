@@ -1,7 +1,7 @@
 import socket, ssl, threading, sqlite3, hashlib, pyotp, secrets
 
-host = '127.0.0.1'
-post = 8080
+host = '0.0.0.0'
+port = 8080
 clients = []
 
 def get_db():
@@ -86,9 +86,9 @@ def starts_server():
     context.load_cert_chain("server.crt", "server.key")
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((host, post)) #() là cú pháp tuple-bộ dữ liệu
+    s.bind((host, port)) #() là cú pháp tuple-bộ dữ liệu
     s.listen() 
-    print(f"Server OpenSSL đang chạy tại {host}:{post}")
+    print(f"Server OpenSSL đang chạy tại {host}:{port}")
 
     with context.wrap_socket(s, server_side=True) as ssl_sock:
         while True:
